@@ -1,8 +1,10 @@
 // created manually
 
 // import
-import { students, total } from './students';
+// NOTE: must be top level, so can't be in block
+import { students, total } from './students'; // assumes .js
 import multiply from './calculator';
+
 console.log(students, total);
 console.log(multiply(3,5));
 
@@ -76,7 +78,27 @@ console.log(multiply(3,5));
 
 // filter function
 {
-  let scores = [90, 85, 67, 71, 70, 55, 92]
+  let scores = [90, 85, 67, 71, 70, 55, 92];
   scores = scores.filter(grade => grade >= 70);
   console.log(scores);
+}
+
+// classes
+import Entity from './entity';
+{
+  let Merry = new Entity('Merry', 4.6);
+  Merry.greet();
+
+  class Hobbit extends Entity {
+    constructor(name, height){
+      super(name, height);
+    }
+    greet(){
+      console.log(`Hi! I'm ${this.name} from the Shire!`)
+    }
+  }
+
+  let Frodo = new Hobbit('Frodo Baggins', 4.5);
+  Frodo.greet();
+  console.log(Frodo);
 }
