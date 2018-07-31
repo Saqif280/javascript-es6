@@ -108,10 +108,41 @@ import Entity from './entity';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+const api_key = '87a08c641f4ff45ebf980219185f37eb';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      city: 'San Francisco',
+      description: ''
+    }
+  }
+
+  // triggered when component has rendered
+  componentDidMount() {
+    this.grabWeather(this.state.city);
+  }
+
+  grabWeather(city) {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?APPID=${api_key}&q=${city}`)
+      .then(response => response.json())
+      .then(json => {
+        this.setState({ description: json.weather[0].description });
+      });
+      /*
+      fetch returns a promise, so we use .then() to get that data in a callback
+      to parse the json data we need .json() which is also a promise, so we need another then to handle it
+      finally after that promise resolves, we can log the data
+      */
+  }
+
   render() {
     return (
-      <div>React JS and JSX in action!</div>
+      <div>
+        <h1>Weather Report for {this.state.city}!</h1>
+        <h2>{this.state.description}</h2>
+      </div>
     )
   }
 }
