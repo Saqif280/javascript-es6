@@ -2,7 +2,7 @@
 
 // native path module
 const path = require('path');
-absPath = (end) => path.resolve(__dirname, end);
+const absPath = end => path.resolve(__dirname, end);
 // settings to direct webpack
 module.exports = {
   // control what it bundles and to where
@@ -14,5 +14,14 @@ module.exports = {
   devServer: {
     port: 3001,
     contentBase: absPath('build')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
   }
 };
