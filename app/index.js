@@ -1,5 +1,11 @@
 // created manually
 
+// import
+import { students, total } from './students';
+import multiply from './calculator';
+console.log(students, total);
+console.log(multiply(3,5));
+
 // template literals
 {
   const a = 'hello';
